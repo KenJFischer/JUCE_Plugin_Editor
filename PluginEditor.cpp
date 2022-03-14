@@ -14,7 +14,7 @@ SynthAudioProcessorEditor::SynthAudioProcessorEditor(SynthAudioProcessor& p)
     : AudioProcessorEditor(&p), audioProcessor(p),
     
     // sliders
-    rotarySlider(*audioProcessor.apvts.getParameter(audioProcessor.ParamNames[audioProcessor.rotaryParam]), this, audioProcessor.rotaryParam),
+    rotarySlider(*audioProcessor.apvts.getParameter(audioProcessor.ParamNames[audioProcessor.rotaryParam]), this, audioProcessor.rotaryParam, false),
     linearSlider(*audioProcessor.apvts.getParameter(audioProcessor.ParamNames[audioProcessor.linearParam]), this, audioProcessor.linearParam),
 
     // attachments
@@ -31,11 +31,11 @@ std::vector<juce::Component*> SynthAudioProcessorEditor::getComps() {
     return { &rotarySlider, &linearSlider };
 }
 
-RotarySlider::RotarySlider(juce::RangedAudioParameter& rap, SynthAudioProcessorEditor* owner, int index) :
+RotarySlider::RotarySlider(juce::RangedAudioParameter& rap, SynthAudioProcessorEditor* owner, int index, bool knobZeroAtLeft) :
     juce::Slider(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, juce::Slider::TextEntryBoxPosition::NoTextBox),
     param(&rap), myOwner(owner), parameterIndex(index)
 {
-    isZeroAtLeft = parameterIndex < myOwner->audioProcessor.NUM_ZERO_AT_LEFT; // determine if origin on knob is at left or in the middle
+    isZeroAtLeft = knobZeroAtLeft; // determine if origin on knob is at left or in the middle
     //juce::ImageCache::setCacheTimeout(10000); // uncomment this if using images for knobs instead of vector graphics
     setLookAndFeel(&lnf);
 }
@@ -91,14 +91,14 @@ void RotarySlider::paint(juce::Graphics& g) {
     constexpr float startAng = degreesToRadians(225.f);
     constexpr float endAng = degreesToRadians(135.f) + MathConstants<float>::twoPi; //270 degrees of rotation
     juce::Range<double> range = getRange();
-    juce::Rectangle<int> sliderBounds = getSquareBounds(false);
+    juce::Rectangle<int> sliderBounds = getSquareBounds(true);
 
     // use this to debug bounding boxes
     //g.setColour(Colours::red);
     //g.drawRect(getLocalBounds());
     //g.setColour(Colours::yellow);
     //g.drawRect(sliderBounds);
-    ////juce::Rectangle<int> debugBounds = getSquareBounds(/*false*/);
+    ////juce::Rectangle<int> debugBounds = getSquareBounds(false);
     ////g.setColour(Colours::blue);
     ////g.drawRect(debugBounds);
 

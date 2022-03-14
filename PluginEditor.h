@@ -38,7 +38,7 @@ private:
 };
 
 struct RotarySlider : juce::Slider {
-    RotarySlider(juce::RangedAudioParameter& rap, SynthAudioProcessorEditor* owner, int index);
+    RotarySlider(juce::RangedAudioParameter& rap, SynthAudioProcessorEditor* owner, int index, bool knobZeroAtLeft);
 
     ~RotarySlider() {
         setLookAndFeel(nullptr);

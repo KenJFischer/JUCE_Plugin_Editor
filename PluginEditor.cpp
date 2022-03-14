@@ -33,9 +33,8 @@ std::vector<juce::Component*> SynthAudioProcessorEditor::getComps() {
 
 RotarySlider::RotarySlider(juce::RangedAudioParameter& rap, SynthAudioProcessorEditor* owner, int index, bool knobZeroAtLeft) :
     juce::Slider(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag, juce::Slider::TextEntryBoxPosition::NoTextBox),
-    param(&rap), myOwner(owner), parameterIndex(index)
+    param(&rap), myOwner(owner), parameterIndex(index), isZeroAtLeft(knobZeroAtLeft)
 {
-    isZeroAtLeft = knobZeroAtLeft; // determine if origin on knob is at left or in the middle
     //juce::ImageCache::setCacheTimeout(10000); // uncomment this if using images for knobs instead of vector graphics
     setLookAndFeel(&lnf);
 }

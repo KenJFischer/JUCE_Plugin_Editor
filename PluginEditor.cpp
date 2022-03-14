@@ -75,7 +75,7 @@ void SynthAudioProcessorEditor::resized()
     juce::Rectangle<int> bounds = getLocalBounds();
     bounds.removeFromTop(BIG_SLIDER_SIZE);
     bounds.removeFromLeft(BIG_SLIDER_SIZE);
-    juce::Rectangle<int> compBounds = bounds.removeFromTop(SLIDER_SIZE);
+    juce::Rectangle<int> compBounds = bounds.removeFromTop(BIG_SLIDER_SIZE);
 
     rotarySlider.setBounds(compBounds.removeFromLeft(SLIDER_SIZE));
     compBounds = bounds.removeFromTop(LINEAR_SLIDER_HEIGHT)

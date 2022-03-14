@@ -101,7 +101,6 @@ public:
 private:
     std::vector<juce::Component*> getComps();
 
-    const static int SLIDER_SIZE = 30;
     const static int BIG_SLIDER_SIZE = 120;
     const static int LITTLE_SLIDER_SIZE = 92;
     const static int LINEAR_SLIDER_HEIGHT = 160;
